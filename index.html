@@ -3,768 +3,608 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamed Digital Pro - Formations et Produits Numériques</title>
+    <title>L'Espace du Bonheur - Votre bien-être naturel</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
         }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #6B46C1 0%, #3182CE 100%);
+        .video-player {
+            width: 100%;
+            height: auto;
+            display: none;
         }
-        
-        .whatsapp-bubble {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-        
-        .whatsapp-bubble:hover {
-            transform: scale(1.1);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .carousel-item {
-            transition: transform 0.6s ease;
-        }
-        
-        .section-divider {
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, #6B46C1 0%, #3182CE 100%);
-            margin: 1rem auto;
-        }
-        
-        .testimonial-card {
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-card:hover {
-            background-color: #f8fafc;
-        }
-        
-        .blob {
+        .play-button {
             position: absolute;
-            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
             border-radius: 50%;
-            filter: blur(50px);
-            opacity: 0.3;
         }
-        
-        .blob-1 {
-            width: 300px;
-            height: 300px;
-            background-color: #4F46E5;
-            top: -100px;
-            right: -100px;
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-        
-        .blob-2 {
-            width: 200px;
-            height: 200px;
-            background-color: #10B981;
-            bottom: -50px;
-            left: -50px;
+        .video-diagnostic-container {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
-        
-        /* Ensure Tailwind's hidden class is not overridden */
-        .hidden {
-            display: none !important;
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
         }
-        
-        /* Custom style for navigation underline */
-        .nav-underline {
-            border-bottom: 4px solid #6B46C1;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- WhatsApp Bubble -->
-    <a href="https://wa.me/22670315721" class="whatsapp-bubble bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-xl">
-        <i class="fab fa-whatsapp text-3xl"></i>
-    </a>
-
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50 nav-underline">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo and Navigation Tabs -->
-                <div class="flex items-center space-x-8">
-                    <a href="#" class="flex items-center">
-                        <img src="logo.jpeg" alt="Hamed Digital Pro Logo" class="h-20">
-                    </a>
-                </div>
-                
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-800 hover:text-indigo-600 font-medium">Accueil</a>
-                    <a href="#products" class="text-gray-800 hover:text-indigo-600 font-medium">Produits</a>
-                    <a href="#trainings" class="text-gray-800 hover:text-indigo-600 font-medium">Formations</a>
-                    <a href="#testimonials" class="text-gray-800 hover:text-indigo-600 font-medium">Témoignages</a>
-                    <a href="#about" class="text-gray-800 hover:text-indigo-600 font-medium">À propos</a>
-                    <a href="#contact" class="text-gray-800 hover:text-indigo-600 font-medium">Contact</a>
-                    
-                    <div class="flex items-center space-x-4 ml-4">
-                        <a href="#" class="text-gray-800 hover:text-indigo-600">
-                            <i class="fas fa-shopping-cart text-xl"></i>
-                        </a>
-                        <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-300">Connexion</a>
-                    </div>
-                </div>
+<body class="font-sans bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-xl font-bold text-green-700">L'Espace du Bonheur</span>
             </div>
-            
-            <!-- Mobile Navigation -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
-                <a href="#home" class="block py-2 text-gray-800 hover:text-indigo-600">Accueil</a>
-                <a href="#products" class="block py-2 text-gray-800 hover:text-indigo-600">Produits</a>
-                <a href="#trainings" class="block py-2 text-gray-800 hover:text-indigo-600">Formations</a>
-                <a href="#testimonials" class="block py-2 text-gray-800 hover:text-indigo-600">Témoignages</a>
-                <a href="#about" class="block py-2 text-gray-800 hover:text-indigo-600">À propos</a>
-                <a href="#contact" class="block py-2 text-gray-800 hover:text-indigo-600">Contact</a>
-                <div class="mt-4 pt-4 border-t border-gray-200">
-                    <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-300">Connexion</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero-gradient relative overflow-hidden">
-        <div class="container mx-auto px-4 py-20 md:py-32 text-white relative z-10">
-            <div class="blob blob-1"></div>
-            <div class="blob blob-2"></div>
-            
-            <div class="md:flex items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                        Transformez votre vie avec nos formations et produits numériques
-                    </h1>
-                    <p class="text-lg mb-8 text-indigo-100 max-w-lg">
-                        Accédez à des connaissances puissantes qui vous aideront à améliorer vos finances, votre leadership et votre développement personnel.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#trainings" class="bg-white text-indigo-600 hover:bg-indigo-50 font-semibold px-6 py-3 rounded-lg text-center transition duration-300">
-                            Voir les formations
-                        </a>
-                        <a href="#products" class="bg-indigo-700 bg-opacity-50 hover:bg-opacity-70 border border-white font-semibold px-6 py-3 rounded-lg text-center transition duration-300">
-                            Nos produits
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                          alt="Personne lisant un livre numérique"
-                          class="rounded-lg shadow-2xl max-w-full h-auto md:max-w-md">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Carousel Section -->
-    <section class="bg-white py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Découvrez nos offres</h2>
-            <div class="section-divider"></div>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-                Nos meilleurs produits et formations sélectionnés pour vous aider dans votre développement.
-            </p>
-            
-            <div class="relative overflow-hidden">
-                <div id="carousel" class="flex transition-transform duration-500">
-                    <!-- Carousel Item 1 -->
-                    <div class="carousel-item w-full flex-shrink-0 p-4">
-                        <div class="bg-gradient-to-r from-purple-100 to-blue-100 rounded-xl p-8 flex flex-col md:flex-row items-center">
-                            <div class="md:w-1/2 mb-6 md:mb-0">
-                                <h3 class="text-2xl font-bold text-indigo-800 mb-4">E-book "La psychologie de l'argent"</h3>
-                                <p class="text-gray-700 mb-4">
-                                    Découvrez les secrets de la richesse et comment développer une relation saine avec l'argent grâce à ce livre numérique.
-                                </p>
-                                <div class="bg-yellow-100 text-yellow-800 inline-block px-3 py-1 rounded-full text-sm font-medium mb-4">
-                                    Promotion: 50% de réduction cette semaine!
-                                </div>
-                                <a href="https://wa.me/22670315721" class="bg-indigo-600 text-white px-6 py-2 rounded-lg inline-block hover:bg-indigo-700 transition duration-300">
-                                    Contacter via WhatsApp
-                                </a>
-                            </div>
-                            <div class="md:w-1/2 flex justify-center">
-                                <img src="la_psychologie_de_largen.jpeg"
-                                      alt="E-book psychologie de l'argent"
-                                      class="rounded-lg shadow-md max-w-full h-auto md:max-w-xs">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Carousel Item 2 -->
-                    <div class="carousel-item w-full flex-shrink-0 p-4">
-                        <div class="bg-gradient-to-r from-green-100 to-teal-100 rounded-xl p-8 flex flex-col md:flex-row items-center">
-                            <div class="md:w-1/2 mb-6 md:mb-0">
-                                <h3 class="text-2xl font-bold text-teal-800 mb-4">E-book "160 Modèles de Contrat"</h3>
-                                <p class="text-gray-700 mb-4">
-                                    Une collection complète de modèles de contrats professionnels prêts à l'emploi pour tous vos besoins juridiques.
-                                </p>
-                                <div class="bg-blue-100 text-blue-800 inline-block px-3 py-1 rounded-full text-sm font-medium mb-4">
-                                    Nouveauté
-                                </div>
-                                <a href="https://wa.me/22670315721" class="bg-teal-600 text-white px-6 py-2 rounded-lg inline-block hover:bg-teal-700 transition duration-300">
-                                    Contacter via WhatsApp
-                                </a>
-                            </div>
-                            <div class="md:w-1/2 flex justify-center">
-                                <img src="160_contrat.jpeg"
-                                      alt="E-book modèles de contrat"
-                                      class="rounded-lg shadow-md max-w-full h-auto md:max-w-xs">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Carousel Controls -->
-                <button id="carousel-prev" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition duration-300">
-                    <i class="fas fa-chevron-left text-indigo-600"></i>
-                </button>
-                <button id="carousel-next" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition duration-300">
-                    <i class="fas fa-chevron-right text-indigo-600"></i>
-                </button>
-            </div>
-            
-            <!-- Carousel Indicators -->
-            <div class="flex justify-center mt-4 space-x-2">
-                <button class="carousel-indicator w-3 h-3 rounded-full bg-indigo-300" data-index="0"></button>
-                <button class="carousel-indicator w-3 h-3 rounded-full bg-indigo-300" data-index="1"></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Popular Products Section -->
-    <section id="products" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Nos Produits Numériques</h2>
-            <div class="section-divider"></div>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-                Des ressources précieuses pour votre développement personnel et professionnel.
-            </p>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product 1 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover transition duration-300">
-                    <div class="relative">
-                        <img 
-                              alt="Père riche, père pauvre" class="w-full h-48 object-cover" src="pere_riche_pere_pauvre.jpg">
-                        <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-                            Best-seller
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-gray-800">"Père riche, père pauvre" - Ebook</h3>
-                        <p class="text-gray-600 mb-4">
-                            Le classique de Robert Kiyosaki sur l'indépendance financière maintenant disponible au format numérique.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-indigo-600 text-xl">9.99€</span>
-                                <span class="text-sm text-gray-500 line-through ml-2">19.99€</span>
-                            </div>
-                            <a href="https://wa.me/22670315721" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
-                                Contacter via WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 2 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover transition duration-300">
-                    <div class="relative">
-                        <img 
-                              alt="L'homme le plus riche de Babylone" class="w-full h-48 object-cover" src="hmme_le_plus_riche_de_babylone.jpeg">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-gray-800">"L'homme le plus riche de Babylone" - Ebook</h3>
-                        <p class="text-gray-600 mb-4">
-                            Les principes intemporels de la réussite financière révélés dans ce livre classique de George S. Clason.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-indigo-600 text-xl">7.99€</span>
-                            </div>
-                            <a href="https://wa.me/22670315721" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
-                                Contacter via WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 3 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover transition duration-300">
-                    <div class="relative">
-                        <img 
-                              alt="160 modèles de contrat" class="w-full h-48 object-cover" src="160_contrat.jpeg">
-                        <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
-                            Nouveau
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-gray-800">"160 Modèles de Contrat"</h3>
-                        <p class="text-gray-600 mb-4">
-                            Une collection complète de contrats pour entrepreneurs, freelances et professionnels dans tous les domaines.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-indigo-600 text-xl">24.99€</span>
-                            </div>
-                            <a href="https://wa.me/22670315721" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
-                                Contacter via WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 4 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover transition duration-300">
-                    <div class="relative">
-                        <img 
-                              alt="Plus malin que le diable" class="w-full h-48 object-cover" src="plus_malin_que_le_diable.jpg">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-gray-800">"Plus malin que le diable" - Ebook</h3>
-                        <p class="text-gray-600 mb-4">
-                            Les secrets de Napoleon Hill pour surmonter vos peurs et atteindre vos objectifs, en format numérique.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-indigo-600 text-xl">12.99€</span>
-                            </div>
-                            <a href="https://wa.me/22670315721" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
-                                Contacter via WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 5 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover transition duration-300">
-                    <div class="relative">
-                        <img 
-                              alt="La psychologie de l'argent" class="w-full h-48 object-cover" src="la_psychologie_de_largen.jpeg">
-                        <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">
-                            Populaire
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-gray-800">"La psychologie de l'argent" - Ebook</h3>
-                        <p class="text-gray-600 mb-4">
-                            Comprenez les comportements financiers qui font la différence entre richesse et pauvreté.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-indigo-600 text-xl">14.99€</span>
-                            </div>
-                            <a href="https://wa.me/22670315721" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
-                                Contacter via WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 6 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover transition duration-300">
-                    <div class="relative">
-                        <img 
-                              alt="Deux Minutes pour Convaincre" class="w-full h-48 object-cover" src="deux_minut_pour_convrainvre.jpeg">
-                        <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
-                            Nouveau
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2 text-gray-800">"Deux Minutes pour Convaincre" - Ebook</h3>
-                        <p class="text-gray-600 mb-4">
-                            Maîtrisez l'art de la persuasion rapide avec des techniques pratiques pour convaincre en seulement deux minutes.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-indigo-600 text-xl">11.99€</span>
-                            </div>
-                            <a href="https://wa.me/22670315721" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
-                                Contacter via WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-10 space-y-4">
-                <a href="https://wa.me/22670315721" class="inline-block bg-white border border-indigo-600 text-indigo-600 font-semibold px-8 py-3 rounded-lg hover:bg-indigo-50 transition duration-300">
-                    Contacter pour tous les produits
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-green-600 font-medium">Accueil</a>
+                <a href="#health-assessment" class="text-gray-700 hover:text-green-600 font-medium">Bilan de Santé</a>
+                <a href="#c9-program" class="text-gray-700 hover:text-green-600 font-medium">Programme C9</a>
+                <a href="#toothgel" class="text-gray-700 hover:text-green-600 font-medium">Forever Bright</a>
+                <a href="#products" class="text-gray-700 hover:text-green-600 font-medium">Produits</a>
+                <a href="#health-tips" class="text-gray-700 hover:text-green-600 font-medium">Conseils santé</a>
+                <a href="#about" class="text-gray-700 hover:text-green-600 font-medium">À propos</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-green-600 font-medium">Témoignages</a>
+                <a href="#contact" class="text-gray-700 hover:text-green-600 font-medium">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="https://wa.me/22654602052" class="text-gray-700 hover:text-green-600">
+                    <i class="fas fa-shopping-cart text-xl"></i>
                 </a>
-                <a href="https://swihtmul.mychariow.com?campaign=SCC7YZB1HL" class="inline-block bg-indigo-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-indigo-700 transition duration-300">
-                    Découvrir plus de produits numériques
+                <a href="https://wa.me/22654602052" class="text-gray-700 hover:text-green-600">
+                    <i class="fas fa-user text-xl"></i>
+                </a>
+                <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div class="md:hidden hidden bg-white w-full py-2 px-4 shadow-md" id="mobile-menu">
+            <a href="#home" class="block py-2 text-gray-700 hover:text-green-600">Accueil</a>
+            <a href="#health-assessment" class="block py-2 text-gray-700 hover:text-green-600">Bilan de Santé</a>
+            <a href="#c9-program" class="block py-2 text-gray-700 hover:text-green-600">Programme C9</a>
+            <a href="#toothgel" class="block py-2 text-gray-700 hover:text-green-600">Forever Bright</a>
+            <a href="#products" class="block py-2 text-gray-700 hover:text-green-600">Produits</a>
+            <a href="#health-tips" class="block py-2 text-gray-700 hover:text-green-600">Conseils santé</a>
+            <a href="#about" class="block py-2 text-gray-700 hover:text-green-600">À propos</a>
+            <a href="#testimonials" class="block py-2 text-gray-700 hover:text-green-600">Témoignages</a>
+            <a href="#contact" class="block py-2 text-gray-700 hover:text-green-600">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section with Video on Click -->
+    <section id="home" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Découvrez Comment Ça Fonctionne</h1>
+            <div class="video-container relative mb-8">
+                <video id="how-it-works-video" class="video-player rounded-lg" controls>
+                    <source src="forever.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas la vidéo.
+                </video>
+                <div class="play-button" onclick="playVideo('how-it-works-video')"><i class="fas fa-play"></i></div>
+            </div>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Présentation des solutions L'Espace du Bonheur à Ouagadougou.</p>
+            <a href="https://wa.me/22654602052" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-full text-lg pulse-animation mt-6">
+                <i class="fab fa-whatsapp mr-2"></i> Contacter nous (+226 54602052)
+            </a>
+        </div>
+    </section>
+
+    <!-- Health Assessment Section -->
+    <section id="health-assessment" class="video-diagnostic-container py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Votre Bilan de Santé</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">realiser un bilan de santé complet.</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden max-w-4xl mx-auto">
+                <div id="assessment-steps" class="p-6 md:p-8">
+                    <div id="step-1" class="assessment-step active">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 mb-6 md:mb-0 md:pr-6">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-4">Découvrez le fonctionnement de la machine</h3>
+                                <p class="text-gray-600 mb-6">Regardez cette vidéo pour comprendre comment fonctionne l'appareil avant de passer à l'action.</p>
+                                <button class="next-step bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full" onclick="document.getElementById('step-2').classList.remove('hidden'); document.getElementById('step-2').classList.add('active'); document.getElementById('step-1').classList.add('hidden'); document.getElementById('step-1').classList.remove('active');">
+                                    Voir la vidéo explicative <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                            <div class="md:w-1/2">
+                                <div class="bg-gray-200 rounded-lg overflow-hidden aspect-video flex items-center justify-center">
+                                    <i class="fas fa-play-circle text-6xl text-green-600"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="step-2" class="assessment-step hidden">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 mb-6 md:mb-0 md:pr-6">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-4">Comment ça fonctionne ?</h3>
+                                <p class="text-gray-600 mb-6">Démonstration de l'appareil du bilan de santé.</p>
+                            </div>
+                            <div class="md:w-1/2">
+                                <div class="video-container relative mb-4">
+                                    <video id="assessment-video" class="video-player rounded-lg" controls>
+                                        <source src="appareille.mp4" type="video/mp4">
+                                        Votre navigateur ne supporte pas la vidéo.
+                                    </video>
+                                    <div class="play-button" onclick="playVideo('assessment-video')"><i class="fas fa-play"></i></div>
+                                </div>
+                                <p class="text-gray-600 text-center">Regardez pour en savoir plus sur la mesure.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="step-3" class="assessment-step hidden">
+                        <div class="text-center">
+                            <div class="bg-green-100 inline-flex items-center justify-center w-20 h-20 rounded-full mb-6">
+                                <i class="fas fa-check-circle text-4xl text-green-600"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Résultats prêts !</h3>
+                            <p class="text-gray-600 mb-6">Recommandations après le bilan.</p>
+                            <div id="recommendations" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <div class="bg-white rounded-lg shadow-md p-6">
+                                    <img src="anemie.jpeg" alt="Anémie" class="w-full h-32 object-cover mb-4 rounded">
+                                    <h4 class="font-bold text-gray-800">Anémie</h4>
+                                    <p class="text-gray-600 text-sm">Soutien nutritionnel.</p>
+                                    <a href="https://wa.me/22654602052" class="mt-4 inline-block text-green-600 font-medium hover:text-green-700">
+                                        Contacter nous <i class="fas fa-arrow-right ml-1"></i>
+                                    </a>
+                                </div>
+                                <div class="bg-white rounded-lg shadow-md p-6">
+                                    <img src="colopathie.jpeg" alt="Colopathie" class="w-full h-32 object-cover mb-4 rounded">
+                                    <h4 class="font-bold text-gray-800">Colopathie</h4>
+                                    <p class="text-gray-600 text-sm">Soutien digestif.</p>
+                                    <a href="https://wa.me/22654602052" class="mt-4 inline-block text-green-600 font-medium hover:text-green-700">
+                                        Contacter nous <i class="fas fa-arrow-right ml-1"></i>
+                                    </a>
+                                </div>
+                                <div class="bg-white rounded-lg shadow-md p-6">
+                                    <img src="enegie_femme.jpeg" alt="Énergie Femme" class="w-full h-32 object-cover mb-4 rounded">
+                                    <h4 class="font-bold text-gray-800">Énergie Femme</h4>
+                                    <p class="text-gray-600 text-sm">Vitalité féminine.</p>
+                                    <a href="https://wa.me/22654602052" class="mt-4 inline-block text-green-600 font-medium hover:text-green-700">
+                                        Contacter nous <i class="fas fa-arrow-right ml-1"></i>
+                                    </a>
+                                </div>
+                                <div class="bg-white rounded-lg shadow-md p-6">
+                                    <img src="energie_homme.jpeg" alt="Énergie Homme" class="w-full h-32 object-cover mb-4 rounded">
+                                    <h4 class="font-bold text-gray-800">Énergie Homme</h4>
+                                    <p class="text-gray-600 text-sm">Vitalité masculine.</p>
+                                    <a href="https://wa.me/22654602052" class="mt-4 inline-block text-green-600 font-medium hover:text-green-700">
+                                        Contacter nous <i class="fas fa-arrow-right ml-1"></i>
+                                    </a>
+                                </div>
+                                <div class="bg-white rounded-lg shadow-md p-6">
+                                    <img src="gycemie.jpeg" alt="Glycémie" class="w-full h-32 object-cover mb-4 rounded">
+                                    <h4 class="font-bold text-gray-800">Glycémie</h4>
+                                    <p class="text-gray-600 text-sm">Contrôle naturel.</p>
+                                    <a href="https://wa.me/22654602052" class="mt-4 inline-block text-green-600 font-medium hover:text-green-700">
+                                        Contacter nous <i class="fas fa-arrow-right ml-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full">
+                                    <i class="fas fa-envelope mr-2"></i> Envoyer par email
+                                </button>
+                                <button class="bg-white hover:bg-gray-100 text-green-600 font-bold py-3 px-6 rounded-full border border-green-600">
+                                    <i class="fas fa-shopping-cart mr-2"></i> Contacter nous
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C9 Program Section -->
+    <section id="c9-program" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">Programme C9 - 9 Jours de Détox</h2>
+            <div class="video-container relative mb-8">
+                <video id="c9-video" class="video-player rounded-lg" controls>
+                    <source src="cfox.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas la vidéo.
+                </video>
+                <div class="play-button" onclick="playVideo('c9-video')"><i class="fas fa-play"></i></div>
+            </div>
+            <ul class="text-xl md:text-2xl mb-8 space-y-2 text-gray-600">
+                <li>Perte de poids</li>
+                <li>Élimination des toxines</li>
+                <li>Rééquilibrage alimentaire</li>
+                <li>Détox du système digestif</li>
+                <li>Sensation de légèreté</li>
+            </ul>
+            <p class="text-gray-600 max-w-2xl mx-auto">Programme de 9 jours pour une détox complète et un mode de vie sain.</p>
+            <a href="https://wa.me/22654602052" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-full text-lg pulse-animation mt-6">
+                <i class="fab fa-whatsapp mr-2"></i> Contacter nous (+226 54602052)
+            </a>
+        </div>
+    </section>
+
+    <!-- Forever Bright Toothgel Section -->
+    <section id="toothgel" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">Forever Bright Toothgel</h2>
+            <div class="video-container relative mb-8">
+                <video id="toothgel-video" class="video-player rounded-lg" controls>
+                    <source src="pate.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas la vidéo.
+                </video>
+                <div class="play-button" onclick="playVideo('toothgel-video')"><i class="fas fa-play"></i></div>
+            </div>
+            <ul class="text-xl md:text-2xl mb-8 space-y-2 text-gray-600">
+                <li>Réduction des saignements des gencives à 100%</li>
+                <li>Efficacité sur la plaque dentaire à 60%</li>
+                <li>Haleine fraîche à 80%</li>
+                <li>Réduction de l'inflammation occasionnelle à 42% après 28 jours</li>
+                <li>Facile à utiliser, texture agréable</li>
+            </ul>
+            <p class="text-gray-600 max-w-2xl mx-auto">Dentifrice naturel à l'aloès vera pour une hygiène buccale optimale.</p>
+            <a href="https://wa.me/22654602052" class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-full text-lg pulse-animation mt-6">
+                <i class="fab fa-whatsapp mr-2"></i> Contacter nous
+            </a>
+        </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section id="products" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nos Catégories de Produits</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('anemie.jpeg');"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Anémie</h3>
+                        <p class="text-gray-600 mb-4">Soutien nutritionnel.</p>
+                        <a href="https://wa.me/22654602052" class="text-green-600 font-medium hover:text-green-700">
+                            Contacter nous <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('colopathie.jpeg');"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Colopathie</h3>
+                        <p class="text-gray-600 mb-4">Soutien digestif.</p>
+                        <a href="https://wa.me/22654602052" class="text-green-600 font-medium hover:text-green-700">
+                            Contacter nous <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('enegie_femme.jpeg');"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Énergie Femme</h3>
+                        <p class="text-gray-600 mb-4">Vitalité féminine.</p>
+                        <a href="https://wa.me/22654602052" class="text-green-600 font-medium hover:text-green-700">
+                            Contacter nous <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('energie_homme.jpeg');"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Énergie Homme</h3>
+                        <p class="text-gray-600 mb-4">Vitalité masculine.</p>
+                        <a href="https://wa.me/22654602052" class="text-green-600 font-medium hover:text-green-700">
+                            Contacter nous <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="https://wa.me/22654602052" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full">
+                    Voir tous nos produits <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Trainings Section -->
-    <section id="trainings" class="py-16 bg-white">
+    <!-- Health Tips Section -->
+    <section id="health-tips" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Nos Formations</h2>
-            <div class="section-divider"></div>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-                Des formations complètes animées par des experts pour vous aider à atteindre vos objectifs.
-            </p>
-            
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Conseils Santé</h2>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Training 1 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 card-hover transition duration-300">
-                    <div class="relative">
-                        <img 
-                              alt="Formation Alibaba" class="w-full h-48 object-cover" src="alibaba.jpeg">
-                        <div class="absolute bottom-0 left-0 bg-indigo-600 text-white px-3 py-1 rounded-tr-lg">
-                            <i class="fas fa-clock mr-1"></i> 10h de contenu
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Détox avec C9</h3>
+                    <p class="text-gray-600 mb-4">Éliminez les toxines.</p>
+                    <a href="https://wa.me/22654602052" class="text-green-600 font-medium hover:text-green-700">Contacter nous <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Énergie</h3>
+                    <p class="text-gray-600 mb-4">Boostez-vous naturellement.</p>
+                    <a href="https://wa.me/22654602052" class="text-green-600 font-medium hover:text-green-700">Contacter nous <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Hygiène buccale</h3>
+                    <p class="text-gray-600 mb-4">Avec Forever Bright Toothgel.</p>
+                    <a href="https://wa.me/22654602052" class="text-green-600 font-medium hover:text-green-700">Contacter nous <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Forever -->
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">À propos de L'Espace du Bonheur</h2>
+                    <p class="text-gray-600 mb-4">Produits naturels depuis 1978.</p>
+                    <p class="text-gray-600 mb-6">Technologie et soins à Ouagadougou.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-2 rounded-full mr-4">
+                                <i class="fas fa-leaf text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">100% Naturel</h4>
+                                <p class="text-gray-600">Qualité supérieure.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-2 rounded-full mr-4">
+                                <i class="fas fa-globe text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">160 pays</h4>
+                                <p class="text-gray-600">Communauté mondiale.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-2 rounded-full mr-4">
+                                <i class="fas fa-award text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Certifications</h4>
+                                <p class="text-gray-600">Normes strictes.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-xl text-gray-800">Formation Alibaba</h3>
-                            <div class="flex items-center text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <span class="ml-1 text-gray-700">4.8</span>
-                            </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Aloe Vera Plantation" class="w-full h-full object-cover">
                         </div>
-                        <p class="text-gray-600 mb-4">
-                            Maîtrisez le commerce sur Alibaba: sourcing, négociation, import/export et stratégies de vente.
-                        </p>
-                        <div class="flex items-center text-gray-500 mb-4">
-                            <i class="fas fa-user-graduate mr-2"></i>
-                            <span>987 participants</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-indigo-600 text-xl">89€</span>
-                            </div>
-                            <a href="https://wa.me/22670315721" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
-                                Contacter via WhatsApp
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Engagement</h3>
+                            <p class="text-gray-600 mb-4">De la plantation au Toothgel.</p>
+                            <a href="https://wa.me/22654602052" class="inline-block text-green-600 font-medium hover:text-green-700">
+                                Contacter nous <i class="fas fa-arrow-right ml-1"></i>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="text-center mt-10">
-                <a href="https://wa.me/22670315721" class="inline-block bg-indigo-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-indigo-700 transition duration-300">
-                    Contacter pour toutes les formations
-                </a>
-            </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="py-16 bg-gradient-to-r from-indigo-50 to-blue-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Pourquoi choisir Hamed Digital Pro ?</h2>
-            <div class="section-divider"></div>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-                Nous vous offrons une expérience d'apprentissage unique et des contenus de qualité.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="bg-white p-8 rounded-xl shadow-sm text-center hover:shadow-md transition duration-300">
-                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-chalkboard-teacher text-indigo-600 text-2xl"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3 text-gray-800">Experts reconnus</h3>
-                    <p class="text-gray-600">
-                        Nos formateurs sont des professionnels expérimentés et reconnus dans leurs domaines.
-                    </p>
-                </div>
-                
-                <!-- Feature 2 -->
-                <div class="bg-white p-8 rounded-xl shadow-sm text-center hover:shadow-md transition duration-300">
-                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-laptop-code text-indigo-600 text-2xl"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3 text-gray-800">Accès 24/7</h3>
-                    <p class="text-gray-600">
-                        Apprenez à votre rythme, quand vous voulez et depuis n'importe quel appareil.
-                    </p>
-                </div>
-                
-                <!-- Feature 3 -->
-                <div class="bg-white p-8 rounded-xl shadow-sm text-center hover:shadow-md transition duration-300">
-                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center">
-                        <i class="fas fa-certificate text-indigo-600 text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3 text-gray-800">Certification</h3>
-                    <p class="text-gray-600">
-                        Obtenez un certificat reconnu à la fin de chaque formation pour valoriser vos compétences.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
+    <!-- Testimonials -->
     <section id="testimonials" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Ce que disent nos clients</h2>
-            <div class="section-divider"></div>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-                Plus de 10 000 personnes nous ont déjà fait confiance pour leur développement.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-gray-50 p-6 rounded-lg testimonial-card">
-                    <div class="flex items-center mb-4">
-                        <img src="https://randomuser.me/api/portraits/women/32.jpg"
-                              alt="Claire D."
-                              class="w-12 h-12 rounded-full object-cover">
-                        <div class="ml-4">
-                            <h4 class="font-semibold text-gray-800">Claire D.</h4>
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic">
-                        "L'e-book 'La psychologie de l'argent' a complètement changé ma façon de voir les finances. Je recommande à 100%!"
-                    </p>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="bg-gray-50 p-6 rounded-lg testimonial-card">
-                    <div class="flex items-center mb-4">
-                        <img src="https://randomuser.me/api/portraits/men/42.jpg"
-                              alt="Marc L."
-                              class="w-12 h-12 rounded-full object-cover">
-                        <div class="ml-4">
-                            <h4 class="font-semibold text-gray-800">Marc L.</h4>
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic">
-                        "Grâce au kit de contrats, j'ai pu créer mon entreprise sereinement. Un gain de temps énorme et tous les documents étaient parfaits."
-                    </p>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="bg-gray-50 p-6 rounded-lg testimonial-card">
-                    <div class="flex items-center mb-4">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg"
-                              alt="Sophie M."
-                              class="w-12 h-12 rounded-full object-cover">
-                        <div class="ml-4">
-                            <h4 class="font-semibold text-gray-800">Sophie M.</h4>
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic">
-                        "La formation sur Alibaba a permis de monter mon business d'import-export en 2 mois seulement. Des conseils précis et applicables!"
-                    </p>
-                </div>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Témoignages</h2>
             </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="py-16 bg-indigo-600 text-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl font-bold mb-4">Restez informés</h2>
-                <p class="text-lg mb-8 max-w-2xl mx-auto">
-                    Abonnez-vous à notre newsletter pour recevoir des conseils exclusifs, des offres spéciales et nos dernières nouveautés.
-                </p>
-                
-                <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-                    <input type="email"
-                            placeholder="Votre email"
-                            class="flex-grow px-4 py-3 rounded-lg focus:outline-none text-gray-800 shadow-md"
-                           required>
-                    <button type="submit"
-                             class="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-lg hover:bg-indigo-50 transition duration-300">
-                        S'abonner
-                    </button>
-                </form>
-                
-                <p class="text-indigo-200 text-sm mt-4">
-                    Nous respectons votre vie privée. Vous pouvez vous désabonner à tout moment.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="md:flex items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h2 class="text-3xl font-bold mb-6 text-gray-800">Notre mission</h2>
-                    <div class="section-divider" style="margin: 1rem 0;"></div>
-                    <p class="text-gray-600 mb-4">
-                        Hamed Digital Pro a été créé avec une vision simple: rendre l'éducation financière et le développement personnel accessibles à tous.
-                    </p>
-                    <p class="text-gray-600 mb-6">
-                        Nous croyons que la connaissance est la clé du succès et nous nous engageons à fournir des contenus de la plus haute qualité à des prix abordables.
-                    </p>
-                    <div class="flex items-center">
-                        <div class="bg-indigo-100 p-3 rounded-full mr-4">
-                            <i class="fas fa-users text-indigo-600 text-xl"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-green-600"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800">10,000+</h4>
-                            <p class="text-gray-600">Clients satisfaits</p>
+                            <h4 class="font-bold text-gray-800">Amélie D.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
                         </div>
                     </div>
+                    <p class="text-gray-600 italic">"Le C9 m'a transformée !"</p>
                 </div>
-                <div class="md:w-1/2 md:pl-12">
-                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D&auto=format&fit=crop&w=1470&q=80"
-                          alt="Équipe Hamed Digital Pro"
-                          class="rounded-lg shadow-xl">
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-green-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Thomas L.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Toothgel a amélioré mon sourire."</p>
                 </div>
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-green-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sophie M.</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"La vidéo Toothgel est convaincante."</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="https://wa.me/22654602052" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full">
+                    Lire plus <i class="fas fa-arrow-right ml-2"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-100">
+    <!-- Newsletter -->
+    <section class="py-16 bg-green-700 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Restez informé</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Abonnez-vous pour des conseils.</p>
+            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                <input type="email" placeholder="Votre email" class="flex-grow px-4 py-3 rounded-full text-gray-800 focus:outline-none">
+                <button type="submit" class="bg-white hover:bg-gray-100 text-green-700 font-bold px-6 py-3 rounded-full">
+                    S'abonner <i class="fas fa-paper-plane ml-2"></i>
+                </button>
+            </form>
+            <p class="text-sm mt-4 opacity-80">Nous respectons votre vie privée.</p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-2 text-gray-800">Contactez-nous</h2>
-            <div class="section-divider"></div>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-                Nous sommes là pour répondre à toutes vos questions. N'hésitez pas à nous contacter!
-            </p>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Contact Form -->
-                <div class="bg-white p-8 rounded-xl shadow-sm">
-                    <h3 class="text-xl font-semibold mb-6 text-gray-800">Envoyez-nous un message</h3>
-                    
-                    <form>
-                        <div class="mb-6">
-                            <label for="name" class="block text-gray-700 font-medium mb-2">Votre nom</label>
-                            <input type="text"
-                                    id="name"
-                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Contactez-nous</h2>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
+                <div class="lg:w-1/2">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Nom</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                         </div>
-                        
-                        <div class="mb-6">
-                            <label for="email" class="block text-gray-700 font-medium mb-2">Votre email</label>
-                            <input type="email"
-                                    id="email"
-                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                         </div>
-                        
-                        <div class="mb-6">
+                        <div>
                             <label for="subject" class="block text-gray-700 font-medium mb-2">Sujet</label>
-                            <select id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                <option value="" selected disabled>Choisissez un sujet</option>
-                                <option value="products">Question sur un produit</option>
-                                <option value="trainings">Question sur une formation</option>
-                                <option value="billing">Problème de paiement</option>
+                            <select id="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <option value="">Sélectionnez</option>
+                                <option value="assessment">Bilan</option>
+                                <option value="c9">Programme C9</option>
+                                <option value="toothgel">Forever Bright</option>
+                                <option value="products">Produits</option>
+                                <option value="order">Commande</option>
                                 <option value="other">Autre</option>
                             </select>
                         </div>
-                        
-                        <div class="mb-6">
-                            <label for="message" class="block text-gray-700 font-medium mb-2">Votre message</label>
-                            <textarea id="message"
-                                       rows="4"
-                                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
                         </div>
-                        
-                        <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition duration-300 w-full">
-                            Envoyer le message
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full">
+                            Envoyer <i class="fas fa-paper-plane ml-2"></i>
                         </button>
                     </form>
                 </div>
-                
-                <!-- Contact Info -->
-                <div>
-                    <h3 class="text-xl font-semibold mb-6 text-gray-800">Autres moyens de contact</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="bg-indigo-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-envelope text-indigo-600 text-xl"></i>
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-50 rounded-xl p-8 h-full">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Coordonnées</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-green-100 p-2 rounded-full mr-4">
+                                    <i class="fas fa-map-marker-alt text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Adresse</h4>
+                                    <p class="text-gray-600">Ouagadougou</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Email</h4>
-                                <p class="text-gray-600">contact@hameddigitalpro.com</p>
+                            <div class="flex items-start">
+                                <div class="bg-green-100 p-2 rounded-full mr-4">
+                                    <i class="fas fa-phone-alt text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Téléphone</h4>
+                                    <p class="text-gray-600">+226 54 60 20 52</p>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-indigo-100 p-3 rounded-full mr-4">
-                                <i class="fab fa-whatsapp text-indigo-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">WhatsApp</h4>
-                                <p class="text-gray-600">+226 70315721</p>
-                                <a href="https://wa.me/22670315721" class="text-indigo-600 hover:underline inline-block mt-1">
-                                    Cliquez ici pour discuter
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-indigo-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-clock text-indigo-600 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Horaires</h4>
-                                <p class="text-gray-600">Lundi - Vendredi : 09h00 - 18h00</p>
-                                <p class="text-gray-600">Samedi : 10h00 - 15h00</p>
+                            <div class="flex items-start">
+                                <div class="bg-green-100 p-2 rounded-full mr-4">
+                                    <i class="fas fa-envelope text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                                    <p class="text-gray-600">contact@forever-exemple.com</p>
+                                </div>
                             </div>
                         </div>
-                        
                         <div class="mt-8">
-                            <h3 class="font-bold text-gray-800 mb-4">Suivez-nous</h3>
+                            <h4 class="font-bold text-gray-800 mb-4">Suivez-nous</h4>
                             <div class="flex space-x-4">
-                                <a href="#" class="bg-gray-200 text-gray-700 p-3 rounded-full hover:bg-blue-100 hover:text-blue-600 transition duration-300">
+                                <a href="https://www.facebook.com/foreverliving" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full w-10 h-10 flex items-center justify-center">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="#" class="bg-gray-200 text-gray-700 p-3 rounded-full hover:bg-blue-100 hover:text-blue-500 transition duration-300">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="bg-gray-200 text-gray-700 p-3 rounded-full hover:bg-blue-100 hover:text-blue-600 transition duration-300">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="#" class="bg-gray-200 text-gray-700 p-3 rounded-full hover:bg-blue-100 hover:text-blue-600 transition duration-300">
+                                <a href="https://www.instagram.com/foreverliving" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full w-10 h-10 flex items-center justify-center">
                                     <i class="fab fa-instagram"></i>
                                 </a>
+                                <a href="https://www.youtube.com/foreverliving" class="bg-green-600 hover:bg-green-700 text-white p-3 rounded-full w-10 h-10 flex items-center justify-center">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Opportunity -->
+    <section class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Rejoignez notre équipe</h2>
+                    <p class="text-xl mb-6">Promouvez C9 et Toothgel.</p>
+                    <p class="mb-8">Opportunité à Ouagadougou.</p>
+                    <a href="https://wa.me/22654602052" class="inline-block bg-white hover:bg-gray-100 text-gray-900 font-bold py-3 px-8 rounded-full">
+                        Contacter nous <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-800 rounded-xl p-8">
+                        <h3 class="text-xl font-bold mb-4">Avantages</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-green-600 p-2 rounded-full mr-4">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Revenus</h4>
+                                    <p class="text-gray-300">Commissions compétitives.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-green-600 p-2 rounded-full mr-4">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Flexibilité</h4>
+                                    <p class="text-gray-300">Travaillez à votre rythme.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -774,133 +614,143 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-gray-800 text-white pt-16 pb-8">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Column 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <div>
-                    <h3 class="text-xl font-bold mb-4 flex items-center">
-                        <img src="logo.jpeg" alt="Hamed Digital Pro Logo" class="h-20 mr-2">
-                        <span>Hamed Digital Pro</span>
-                    </h3>
-                    <p class="text-gray-400">Votre partenaire pour le développement personnel et professionnel.</p>
-                </div>
-                
-                <!-- Column 2 -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4">Navigation</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Accueil</a></li>
-                        <li><a href="#products" class="text-gray-400 hover:text-white transition duration-300">Produits</a></li>
-                        <li><a href="#trainings" class="text-gray-400 hover:text-white transition duration-300">Formations</a></li>
-                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition duration-300">Témoignages</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Column 3 -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4">Mentions légales</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">CGV</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Politique de confidentialité</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Mentions légales</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Politique de remboursement</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Column 4 -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4">Paiements sécurisés</h3>
-                    <div class="grid grid-cols-3 gap-2 mb-4">
-                        <div class="bg-gray-800 p-3 rounded flex items-center justify-center">
-                            <i class="fab fa-visa text-2xl"></i>
-                        </div>
-                        <div class="bg-gray-800 p-3 rounded flex items-center justify-center">
-                            <i class="fab fa-mastercard text-2xl"></i>
-                        </div>
-                        <div class="bg-gray-800 p-3 rounded flex items-center justify-center">
-                            <i class="fab fa-paypal text-2xl"></i>
-                        </div>
+                    <h3 class="text-xl font-bold mb-4">L'Espace du Bonheur</h3>
+                    <p class="text-gray-300 mb-4">Produits et soins à Ouagadougou.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/foreverliving" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/foreverliving" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/foreverliving" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-youtube"></i>
+                        </a>
                     </div>
-                    <p class="text-gray-400 text-sm">
-                        Transactions 100% sécurisées avec cryptage SSL.
-                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Produits</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://wa.me/22654602052" class="text-gray-300 hover:text-white">Anémie</a></li>
+                        <li><a href="https://wa.me/22654602052" class="text-gray-300 hover:text-white">Colopathie</a></li>
+                        <li><a href="https://wa.me/22654602052" class="text-gray-300 hover:text-white">Énergie Femme</a></li>
+                        <li><a href="https://wa.me/22654602052" class="text-gray-300 hover:text-white">Énergie Homme</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Informations</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://wa.me/22654602052" class="text-gray-300 hover:text-white">À propos</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-white">Contact</a></li>
+                        <li><a href="https://wa.me/22654602052" class="text-gray-300 hover:text-white">Conditions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-gray-300 mr-2 mt-1"></i>
+                            <span class="text-gray-300">Ouagadougou</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-gray-300 mr-2"></i>
+                            <span class="text-gray-300">+226 54 60 20 52</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                <p>© 2025 Hamed Digital Pro. Tous les droits réservés.</p>
+            <div class="border-t border-gray-700 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-300 mb-4 md:mb-0">© 2025 L'Espace du Bonheur. Tous droits réservés.</p>
+                    <div class="flex space-x-6">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Visa_2021.svg" alt="Visa" class="h-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="MasterCard" class="h-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Paypal_2014_logo.svg" alt="PayPal" class="h-8">
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Floating WhatsApp Button -->
+    <div class="floating-whatsapp">
+        <a href="https://wa.me/22654602052" class="bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg flex items-center justify-center">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </a>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Mobile Menu Toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
 
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                    console.log('Menu toggled'); // Debugging
+        // Health assessment steps navigation
+        document.querySelectorAll('.next-step').forEach(button => {
+            button.addEventListener('click', function() {
+                const currentStep = this.closest('.assessment-step');
+                const nextStepId = currentStep.id.replace(/(\d+)/, function(match, number) {
+                    return parseInt(number) + 1;
                 });
-            } else {
-                console.error('Erreur : mobile-menu-button ou mobile-menu introuvable');
-            }
+                currentStep.classList.remove('active');
+                currentStep.classList.add('hidden');
+                const nextStep = document.getElementById(nextStepId);
+                nextStep.classList.remove('hidden');
+                nextStep.classList.add('active');
+            });
+        });
 
-            // Carousel Functionality
-            let currentSlide = 0;
-            const carousel = document.getElementById('carousel');
-            const items = document.querySelectorAll('.carousel-item');
-            const totalItems = items.length;
-            const indicators = document.querySelectorAll('.carousel-indicator');
+        // Video play function with single active video control
+        function playVideo(videoId) {
+            const videos = [
+                'how-it-works-video',
+                'assessment-video',
+                'c9-video',
+                'toothgel-video'
+            ];
+            const currentVideo = document.getElementById(videoId);
+            const currentPlayButton = currentVideo.parentElement.querySelector('.play-button');
 
-            function showSlide(index) {
-                if (index >= totalItems) {
-                    index = 0;
-                } else if (index < 0) {
-                    index = totalItems - 1;
-                }
-
-                carousel.style.transform = `translateX(${-index * 100}%)`;
-                currentSlide = index;
-
-                // Update indicators
-                indicators.forEach((indicator, i) => {
-                    if (i === currentSlide) {
-                        indicator.classList.remove('bg-indigo-300');
-                        indicator.classList.add('bg-indigo-600');
-                    } else {
-                        indicator.classList.remove('bg-indigo-600');
-                        indicator.classList.add('bg-indigo-300');
+            // Pause and hide all other videos
+            videos.forEach(id => {
+                if (id !== videoId) {
+                    const otherVideo = document.getElementById(id);
+                    const otherPlayButton = otherVideo.parentElement.querySelector('.play-button');
+                    if (otherVideo.style.display !== 'none') {
+                        otherVideo.pause();
+                        otherVideo.style.display = 'none';
+                        otherPlayButton.style.display = 'block';
                     }
-                });
-            }
-
-            // Next button
-            document.getElementById('carousel-next').addEventListener('click', () => {
-                showSlide(currentSlide + 1);
+                }
             });
 
-            // Previous button
-            document.getElementById('carousel-prev').addEventListener('click', () => {
-                showSlide(currentSlide - 1);
-            });
+            // Play the selected video
+            currentVideo.style.display = 'block';
+            currentVideo.play();
+            currentPlayButton.style.display = 'none';
+        }
 
-            // Indicator click
-            indicators.forEach(indicator => {
-                indicator.addEventListener('click', () => {
-                    const index = parseInt(indicator.getAttribute('data-index'));
-                    showSlide(index);
-                });
+        // WhatsApp link
+        document.querySelectorAll('a[href^="https://wa.me"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = this.href;
             });
+        });
 
-            // Auto slide every 5 seconds
-            setInterval(() => {
-                showSlide(currentSlide + 1);
-            }, 5000);
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
         });
     </script>
 </body>
